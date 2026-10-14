@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const status = document.getElementById("message");
   const submitBtn = document.getElementById("submit-button");
 
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw4hvoOO8m9F0zn4RN5TTEBgr9u0qWV2R-EqpzPj57I7rj_0r542x9Fnr89d_5a357o/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBDSiGYs7NqUAPRbUU-VjcnlqWBVTduqRJ36k8pHz82NFOJgMG3fvBfGNT2pKtEFnr/exec";
 
   if (form) {
     form.addEventListener("submit", async e => {
