@@ -287,3 +287,48 @@ legend { font-weight: 900; font-size: 15px; color: var(--sign); padding: 0; marg
   .brand-sub { display: none; }
   .sign-actions .btn { width: 100%; }
 }
+
+/* ===================== Réseau national (services) ===================== */
+.network-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 40px; align-items: start; background: var(--paper); border-radius: var(--radius-sign); padding: clamp(24px, 4vw, 48px); border-top: 6px solid var(--cone); }
+.network h2 { font-size: clamp(26px, 3vw, 36px); margin-bottom: 18px; }
+.network p { margin-bottom: 14px; max-width: 62ch; }
+.network-goal { font-weight: 800; color: var(--sign); font-size: 19px; }
+.network-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.network-stat { background: var(--sign); color: #fff; border-radius: var(--radius-sign); padding: 32px 28px; text-align: center; position: relative; }
+.network-stat::before { content: ""; position: absolute; inset: 8px; border: 3px solid #fff; border-radius: 8px; pointer-events: none; }
+.stat-big { font-size: clamp(72px, 9vw, 104px); font-weight: 900; line-height: 1; letter-spacing: -0.04em; }
+.stat-label { font-weight: 800; font-size: 19px; margin-top: 8px; }
+.stat-list { list-style: none; padding: 0; margin: 22px 0 0; text-align: left; border-top: 2px solid rgba(255,255,255,.35); }
+.stat-list li { padding: 10px 0 10px 26px; position: relative; font-size: 15px; border-bottom: 1px solid rgba(255,255,255,.2); }
+.stat-list li::before { content: "✓"; position: absolute; left: 4px; color: var(--cone); font-weight: 900; }
+
+/* ===================== Avis clients ===================== */
+.rating-bar { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; background: var(--paper); border-radius: var(--radius-sign); padding: 22px 28px; margin-bottom: 24px; }
+.rating-bar[hidden] { display: none; }
+.rating-bar .btn { margin-left: auto; }
+.rating-score { font-size: 56px; font-weight: 900; line-height: 1; letter-spacing: -0.03em; color: var(--sign); }
+.rating-score small { font-size: 20px; color: var(--muted); font-weight: 700; margin-left: 4px; }
+.stars { color: var(--cone); font-size: 22px; letter-spacing: 2px; line-height: 1.2; }
+.stars .off { color: var(--line); }
+.review-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.review { background: var(--paper); border-radius: var(--radius-sign); padding: 22px; display: flex; flex-direction: column; gap: 10px; border-top: 4px solid var(--sign); }
+.review-name { font-weight: 800; }
+.review-date { color: var(--muted); font-size: 14px; }
+.review blockquote { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
+.pager { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 28px; }
+.pager button { font: inherit; font-weight: 700; min-width: 42px; height: 42px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
+.pager button:hover:not(:disabled) { border-color: var(--sign); color: var(--sign); }
+.pager button[aria-current="page"] { background: var(--sign); border-color: var(--sign); color: #fff; }
+.pager button:disabled { opacity: .45; cursor: default; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-status.ok { color: #1B6E3A; }
+
+@media (max-width: 1000px) {
+  .network-grid { grid-template-columns: 1fr; }
+  .review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .review-grid { grid-template-columns: 1fr; }
+  .rating-bar .btn { margin-left: 0; width: 100%; }
+  .network-cta .btn { width: 100%; }
+}
