@@ -76,6 +76,15 @@
           <a class="btn btn-go" href="#avis-form-section">Laisser un avis</a>
         </div>
 
+        <div class="review-toolbar" id="review-toolbar" hidden>
+          <label for="sort-reviews">Trier par</label>
+          <select class="select" id="sort-reviews">
+            <option value="recent">Les plus récents</option>
+            <option value="high">Note : de la plus haute à la plus basse</option>
+            <option value="low">Note : de la plus basse à la plus haute</option>
+          </select>
+        </div>
+
         <p id="reviews-status" class="muted" role="status">Chargement des avis…</p>
         <div class="review-grid" id="reviews"></div>
         <nav class="pager" id="pager" aria-label="Pagination des avis"></nav>
