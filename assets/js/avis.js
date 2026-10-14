@@ -1,7 +1,7 @@
 /* Page Avis clients : lecture/écriture via Google Apps Script (Google Sheets) */
 (() => {
   // 1) Collez ici l'URL de déploiement de votre Apps Script (voir avis-apps-script.gs)
-  const REVIEWS_URL = "";
+  const REVIEWS_URL = "https://script.google.com/macros/s/AKfycbykDNojnn3CwWQCNfWbngBCCkRKSjK2a46W9QvaMiQWWGhF3P6qDjUR6XKUvjNBqmlpiw/exec";
   const PER_PAGE = 12;
 
   const grid = document.getElementById("reviews");
