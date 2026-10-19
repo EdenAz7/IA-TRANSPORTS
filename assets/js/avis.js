@@ -1,4 +1,4 @@
-/* Page Avis clients : lecture/écriture via Google Apps Script (Google Sheets) */
+/* Page Témoignages clients : lecture/écriture via Google Apps Script (Google Sheets) */
 (() => {
   // 1) Collez ici l'URL de déploiement de votre Apps Script (voir avis-apps-script.gs)
   const REVIEWS_URL = "https://script.google.com/macros/s/AKfycbykDNojnn3CwWQCNfWbngBCCkRKSjK2a46W9QvaMiQWWGhF3P6qDjUR6XKUvjNBqmlpiw/exec";
@@ -26,9 +26,9 @@
 
   // Aperçu local uniquement : ajoutez ?demo=1 à l'URL. Ne s'affiche jamais en production par défaut.
   const DEMO = [
-    { name: "Prénom N.", date: "2026-01-10", rating: 5, comment: "Exemple d'avis (aperçu de la mise en page uniquement)." },
-    { name: "Prénom N.", date: "2026-01-08", rating: 4, comment: "Exemple d'avis (aperçu de la mise en page uniquement)." },
-    { name: "Prénom N.", date: "2026-01-05", rating: 5, comment: "Exemple d'avis (aperçu de la mise en page uniquement)." }
+    { name: "Prénom N.", date: "2026-01-10", rating: 5, comment: "Exemple de témoignage (aperçu de la mise en page uniquement)." },
+    { name: "Prénom N.", date: "2026-01-08", rating: 4, comment: "Exemple de témoignage (aperçu de la mise en page uniquement)." },
+    { name: "Prénom N.", date: "2026-01-05", rating: 5, comment: "Exemple de témoignage (aperçu de la mise en page uniquement)." }
   ];
 
   function render() {
@@ -43,6 +43,7 @@
     const pages = Math.ceil(reviews.length / PER_PAGE);
     pager.innerHTML = "";
     if (pages > 1) {
+      pager.setAttribute("aria-label", "Pagination des témoignages");
       const btn = (label, p, opts = {}) => {
         const b = document.createElement("button");
         b.type = "button"; b.textContent = label; b.disabled = !!opts.disabled;
@@ -58,7 +59,7 @@
 
   function show(list) {
     all = list.filter(r => r && r.comment).map(r => ({ ...r, rating: Math.min(5, Math.max(1, Number(r.rating) || 5)) }));
-    if (!all.length) { statusEl.textContent = "Aucun avis publié pour le moment. Soyez le premier à partager votre expérience !"; return; }
+    if (!all.length) { statusEl.textContent = "Aucun témoignage publié pour le moment. Soyez le premier à partager votre expérience !"; return; }
     statusEl.hidden = true;
     const avg = all.reduce((a, r) => a + r.rating, 0) / all.length;
     document.getElementById("avg-score").textContent = avg.toFixed(1).replace(".", ",");
@@ -74,11 +75,11 @@
   sortSel && sortSel.addEventListener("change", () => { page = 1; applySort(); render(); });
 
   if (new URLSearchParams(location.search).has("demo")) show(DEMO);
-  else if (!REVIEWS_URL) statusEl.textContent = "Aucun avis publié pour le moment. Soyez le premier à partager votre expérience !";
+  else if (!REVIEWS_URL) statusEl.textContent = "Aucun témoignage publié pour le moment. Soyez le premier à partager votre expérience !";
   else fetch(REVIEWS_URL).then(r => r.json()).then(d => show(d.reviews || []))
-    .catch(() => { statusEl.textContent = "Les avis ne peuvent pas être affichés pour le moment."; });
+    .catch(() => { statusEl.textContent = "Les témoignages ne peuvent pas être affichés pour le moment."; });
 
-  /* ----- Formulaire d'avis ----- */
+  /* ----- Formulaire de témoignage ----- */
   const form = document.getElementById("avis-form");
   const msg = document.getElementById("avis-message");
   const btn = document.getElementById("avis-submit");
@@ -87,16 +88,16 @@
 
   form && form.addEventListener("submit", async e => {
     e.preventDefault();
-    if (!REVIEWS_URL) { msg.className = "form-status error"; msg.textContent = "L'envoi d'avis n'est pas encore activé."; return; }
+    if (!REVIEWS_URL) { msg.className = "form-status error"; msg.textContent = "L'envoi de témoignages n'est pas encore activé."; return; }
     btn.disabled = true; msg.className = "form-status"; msg.textContent = "Envoi en cours…";
     try {
       await fetch(REVIEWS_URL, { method: "POST", body: new FormData(form) });
       form.reset();
       msg.className = "form-status ok";
-      msg.textContent = "Merci ! Votre avis sera publié après vérification.";
+      msg.textContent = "Merci ! Votre témoignage sera publié après vérification.";
     } catch (err) {
       msg.className = "form-status error";
-      msg.textContent = "L'avis n'a pas pu être envoyé. Réessayez dans un instant.";
+      msg.textContent = "Le témoignage n'a pas pu être envoyé. Réessayez dans un instant.";
     }
     btn.disabled = false;
   });
